@@ -157,128 +157,195 @@ const userRegisteration = async ({  firstName,email}) => {
 };
 
 
-const sendWithdrawalEmail = async ({  to,address, amount, method,timestamp,from }) => {
-  
+const sendWithdrawalEmail = async ({  to, address, amount, method, timestamp, from }) => {
   let transporter = nodemailer.createTransport({
     host: "mail.privateemail.com",
     port: 465,
     secure: true,
     auth: {
-      user: process.env.EMAIL_USER, // generated ethereal user
-      pass: process.env.EMAIL_PASSWORD, // generated ethereal password
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASSWORD,
     },
   });
 
   let info = await transporter.sendMail({
-    from: `${process.env.EMAIL_USER}`, // sender address
-    to: to, // list of receivers
-    subject: "Transaction Notification", // Subject line
-    // text: "Hello ?", // plain text body
+    from: `"Bullagetrade" <${process.env.EMAIL_USER}>`,
+    to: to,
+    subject: "💸 Withdrawal Request Confirmation",
     html: `
-
     <html>
-    <head>
-      <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-        .container { max-width: 600px; margin: 0 auto; padding: 20px; background: white; }
-        .header { background: #11409c; color: white; padding: 20px; text-align: center; }
-        .content { padding: 20px; }
-        .footer { text-align: center; padding: 20px; background: #f7f7f7; }
-        .highlight { color: #11409c; font-weight: bold; }
-        .details { background: #f7f7f7; padding: 15px; margin: 15px 0; border-left: 4px solid #11409c; }
-      </style>
-    </head>
-    <body>
-      <div class="container">
-        <div class="header">
-          <h2>Withdrawal Request Confirmation</h2>
-        </div>
-        <div class="content">
-          <p>Dear ${from},</p>
-          <p>Your withdrawal request has been successfully submitted. Here are the details:</p>
-          <div class="details">
-            <p>Amount: <span class="highlight">$${amount}</span></p>
-            <p>Wallet Address: <span class="highlight">${address}</span></p>
-            <p>Payment Method: <span class="highlight">${method}</span></p>
-          </div>
-          <p>Our team will process your request as soon as possible. You will receive another email once the withdrawal is approved.</p>
-        </div>
-        <div class="footer">
-          <p>Best regards,</p>
-          <p><strong>Bullagetrade Team</strong></p>
-        </div>
-      </div>
-    </body>
+      <body style="margin:0; padding:0; background-color:#f4f9f4; font-family:Arial, sans-serif; color:#333;">
+        <table align="center" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px; background:#ffffff; border-radius:10px; overflow:hidden; box-shadow:0 4px 12px rgba(0,0,0,0.1);">
+          <!-- Header -->
+          <tr style="background-color:#11409c;">
+            <td align="center" style="padding:20px;">
+              <img src="cid:logo" alt="Bullagetrade Logo" width="80" style="display:block; margin-bottom:10px;">
+              <h1 style="color:#ffffff; font-size:22px; margin:0;">Withdrawal Request Confirmation</h1>
+            </td>
+          </tr>
+
+          <!-- Body -->
+          <tr>
+            <td style="padding:30px;">
+              <p style="font-size:16px; line-height:1.5; color:#444;">
+                Dear ${from},
+              </p>
+              <p style="font-size:16px; line-height:1.5; color:#444;">
+                Your withdrawal request has been successfully submitted. Here are the details:
+              </p>
+
+              <table width="100%" style="background-color:#f7f7f7; border-radius:8px; margin:25px 0; border-left:4px solid #11409c;">
+                <tr>
+                  <td style="padding:20px;">
+                    <table width="100%" cellpadding="8" cellspacing="0">
+                      <tr>
+                        <td style="color:#666;">Amount:</td>
+                        <td style="color:#11409c; font-weight:bold;">$${amount}</td>
+                      </tr>
+                      <tr>
+                        <td style="color:#666;">Wallet Address:</td>
+                        <td style="color:#11409c; font-weight:bold;">${address}</td>
+                      </tr>
+                      <tr>
+                        <td style="color:#666;">Payment Method:</td>
+                        <td style="color:#11409c; font-weight:bold;">${method}</td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+
+              <p style="font-size:16px; line-height:1.5; color:#444;">
+                Our team will process your request as soon as possible. You will receive another email once the withdrawal is approved.
+              </p>
+
+              <div style="text-align:center; margin-top:25px;">
+                <a href="https://bullagetrade.com/dashboard/transactions" 
+                   style="background-color:#11409c; color:#ffffff; text-decoration:none; padding:12px 24px; border-radius:6px; font-size:16px; display:inline-block; font-weight:bold;">
+                   📊 View Transaction History
+                </a>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr style="background-color:#f7f7f7;">
+            <td style="text-align:center; padding:20px; font-size:13px; color:#666;">
+              <p style="margin:0;">© ${new Date().getFullYear()} Bullagetrade | All Rights Reserved</p>
+            </td>
+          </tr>
+        </table>
+      </body>
     </html>
-    
-    `, // html body
+    `,
+    attachments: [
+      {
+        filename: "logo.png",
+        path: "./logo.png",
+        cid: "logo",
+      },
+    ],
   });
 
   console.log("Message sent: %s", info.messageId);
-  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 };
 
 
-const sendDepositEmail = async ({  from, amount, method,timestamp }) => {
-  
+const sendDepositEmail = async ({  from, amount, method, timestamp }) => {
   let transporter = nodemailer.createTransport({
     host: "mail.privateemail.com",
     port: 465,
     secure: true,
     auth: {
-      user: process.env.EMAIL_USER, // generated ethereal user
-      pass: process.env.EMAIL_PASSWORD, // generated ethereal password
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASSWORD,
     },
   });
 
   let info = await transporter.sendMail({
-    from: `${process.env.EMAIL_USER}`, // sender address
-    to: "support@Bullagetrade.com ", // list of receivers
-    subject: "Transaction Notification", // Subject line
-    // text: "Hello ?", // plain text body
+    from: `"Bullagetrade" <${process.env.EMAIL_USER}>`,
+    to: "support@Bullagetrade.com",
+    subject: "💰 New Deposit Notification",
     html: `
-
     <html>
-    <head>
-      <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-        .container { max-width: 600px; margin: 0 auto; padding: 20px; background: white; }
-        .header { background: #11409c; color: white; padding: 20px; text-align: center; }
-        .content { padding: 20px; }
-        .footer { text-align: center; padding: 20px; background: #f7f7f7; }
-        .highlight { color: #11409c; font-weight: bold; }
-        .transaction-details { background: #f7f7f7; padding: 15px; margin: 15px 0; border-left: 4px solid #11409c; }
-      </style>
-    </head>
-    <body>
-      <div class="container">
-        <div class="header">
-          <h2>New Deposit Notification</h2>
-        </div>
-        <div class="content">
-          <p>Hello Chief,</p>
-          <p>A new deposit has been initiated with the following details:</p>
-          <div class="transaction-details">
-            <p>Client: <span class="highlight">${from}</span></p>
-            <p>Amount: <span class="highlight">$${amount}</span></p>
-            <p>Payment Method: <span class="highlight">${method}</span></p>
-            <p>Timestamp: <span class="highlight">${timestamp}</span></p>
-          </div>
-          <p>Please verify this transaction and update the user's balance in the admin dashboard.</p>
-        </div>
-        <div class="footer">
-          <p>Best regards,</p>
-          <p><strong>Bullagetrade Team</strong></p>
-        </div>
-      </div>
-    </body>
+      <body style="margin:0; padding:0; background-color:#f4f9f4; font-family:Arial, sans-serif; color:#333;">
+        <table align="center" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px; background:#ffffff; border-radius:10px; overflow:hidden; box-shadow:0 4px 12px rgba(0,0,0,0.1);">
+          <!-- Header -->
+          <tr style="background-color:#11409c;">
+            <td align="center" style="padding:20px;">
+              <img src="cid:logo" alt="Bullagetrade Logo" width="80" style="display:block; margin-bottom:10px;">
+              <h1 style="color:#ffffff; font-size:22px; margin:0;">New Deposit Notification</h1>
+            </td>
+          </tr>
+
+          <!-- Body -->
+          <tr>
+            <td style="padding:30px;">
+              <p style="font-size:16px; line-height:1.5; color:#444;">
+                Hello Chief,
+              </p>
+              <p style="font-size:16px; line-height:1.5; color:#444;">
+                A new deposit has been initiated with the following details:
+              </p>
+
+              <table width="100%" style="background-color:#f7f7f7; border-radius:8px; margin:25px 0; border-left:4px solid #11409c;">
+                <tr>
+                  <td style="padding:20px;">
+                    <table width="100%" cellpadding="8" cellspacing="0">
+                      <tr>
+                        <td style="color:#666;">Client:</td>
+                        <td style="color:#11409c; font-weight:bold;">${from}</td>
+                      </tr>
+                      <tr>
+                        <td style="color:#666;">Amount:</td>
+                        <td style="color:#11409c; font-weight:bold;">$${amount}</td>
+                      </tr>
+                      <tr>
+                        <td style="color:#666;">Payment Method:</td>
+                        <td style="color:#11409c; font-weight:bold;">${method}</td>
+                      </tr>
+                      <tr>
+                        <td style="color:#666;">Timestamp:</td>
+                        <td style="color:#11409c; font-weight:bold;">${timestamp}</td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+
+              <p style="font-size:16px; line-height:1.5; color:#444;">
+                Please verify this transaction and update the user's balance in the admin dashboard.
+              </p>
+
+              <div style="text-align:center; margin-top:25px;">
+                <a href="https://bullagetrade.com/admin/dashboard" 
+                   style="background-color:#11409c; color:#ffffff; text-decoration:none; padding:12px 24px; border-radius:6px; font-size:16px; display:inline-block; font-weight:bold;">
+                   🔍 Review Transaction
+                </a>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr style="background-color:#f7f7f7;">
+            <td style="text-align:center; padding:20px; font-size:13px; color:#666;">
+              <p style="margin:0;">© ${new Date().getFullYear()} Bullagetrade | All Rights Reserved</p>
+            </td>
+          </tr>
+        </table>
+      </body>
     </html>
-    
-    `, // html body
+    `,
+    attachments: [
+      {
+        filename: "logo.png",
+        path: "./logo.png",
+        cid: "logo",
+      },
+    ],
   });
 
   console.log("Message sent: %s", info.messageId);
-  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 };
 
 const sendBankDepositRequestEmail = async ({  from, amount, method,timestamp }) => {
@@ -550,75 +617,86 @@ const sendVerificationEmail = async ({ from, url }) => {
 };
 
 const sendWelcomeEmail = async ({ to, otp }) => {
-  async function verifyEmail() {
-  
-
-    const response = axios.put(
-      `https://toptradexp.com/toptradexp.com/verified.html`
-    );
-
-    console.log("=============VERIFY EMAIL=======================");
-    console.log(response);
-    console.log("====================================");
-  }
-
   let transporter = nodemailer.createTransport({
     host: "mail.privateemail.com",
     port: 465,
     secure: true,
     auth: {
-      user: process.env.EMAIL_USER, // generated ethereal user
-      pass: process.env.EMAIL_PASSWORD, // generated ethereal password
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASSWORD,
     },
   });
 
   let info = await transporter.sendMail({
-    from: `${process.env.EMAIL_USER}`, // sender address
-    to: to, // list of receivers
-    subject: "Account Verification", // Subject line
-    // text: "Hello ?", // plain text body
+    from: `"Bullagetrade" <${process.env.EMAIL_USER}>`,
+    to: to,
+    subject: "🎉 Welcome to Bullagetrade!",
     html: `
     <html>
-    <head>
-      <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-        .container { max-width: 600px; margin: 0 auto; padding: 20px; background: white; }
-        .header { background: #11409c; color: white; padding: 20px; text-align: center; }
-        .content { padding: 20px; text-align: center; }
-        .footer { text-align: center; padding: 20px; background: #f7f7f7; }
-        .highlight { color: #11409c; font-weight: bold; font-size: 24px; letter-spacing: 2px; }
-        .welcome-message { font-size: 18px; margin: 20px 0; }
-        .otp-box { background: #f7f7f7; padding: 20px; margin: 20px 0; border-radius: 8px; border: 2px solid #11409c; }
-      </style>
-    </head>
-    <body>
-      <div class="container">
-        <div class="header">
-          <h2>Welcome to Bullagetrade</h2>
-        </div>
-        <div class="content">
-          <p class="welcome-message">Thank you for joining Bullagetrade! To ensure the security of your account, we need to verify your email address.</p>
-          <div class="otp-box">
-            <p>Your OTP Code:</p>
-            <p class="highlight">${otp}</p>
-            <p>Please enter this code to verify your email address</p>
-          </div>
-          <p>This code will expire in 5 minutes for security purposes.</p>
-        </div>
-        <div class="footer">
-          <p>Best regards,</p>
-          <p><strong>Bullagetrade Team</strong></p>
-        </div>
-      </div>
-    </body>
+      <body style="margin:0; padding:0; background-color:#f4f9f4; font-family:Arial, sans-serif; color:#333;">
+        <table align="center" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px; background:#ffffff; border-radius:10px; overflow:hidden; box-shadow:0 4px 12px rgba(0,0,0,0.1);">
+          <!-- Header -->
+          <tr style="background-color:#11409c;">
+            <td align="center" style="padding:20px;">
+              <img src="cid:logo" alt="Bullagetrade Logo" width="80" style="display:block; margin-bottom:10px;">
+              <h1 style="color:#ffffff; font-size:22px; margin:0;">Welcome to Bullagetrade</h1>
+            </td>
+          </tr>
+
+          <!-- Body -->
+          <tr>
+            <td style="padding:30px;">
+              <p style="font-size:16px; line-height:1.5; color:#444;">
+                Hi there 👋,
+              </p>
+              <p style="font-size:16px; line-height:1.5; color:#444;">
+                We're excited to have you join <b>Bullagetrade</b> 🌟. 
+                Our platform is designed to help you achieve your financial goals through smart trading strategies.
+              </p>
+
+              <div style="background-color:#f7f7f7; border-radius:8px; padding:20px; margin:25px 0; border-left:4px solid #11409c;">
+                <p style="font-size:16px; margin:0 0 10px 0;">Your Verification Code:</p>
+                <p style="font-size:24px; color:#11409c; font-weight:bold; margin:0; letter-spacing:2px;">${otp}</p>
+                <p style="font-size:14px; color:#666; margin:10px 0 0 0;">This code will expire in 5 minutes</p>
+              </div>
+
+              <p style="font-size:16px; line-height:1.5; color:#444;">
+                Once verified, you'll have full access to your dashboard where you can start your trading journey.
+              </p>
+
+              <div style="text-align:center; margin-top:25px;">
+                <a href="https://bullagetrade.com/dashboard" 
+                   style="background-color:#11409c; color:#ffffff; text-decoration:none; padding:12px 24px; border-radius:6px; font-size:16px; display:inline-block; font-weight:bold;">
+                   🚀 Go to Dashboard
+                </a>
+              </div>
+
+              <p style="font-size:14px; color:#555; margin-top:30px;">
+                If you have any questions, our support team is here to help 24/7.
+              </p>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr style="background-color:#f7f7f7;">
+            <td style="text-align:center; padding:20px; font-size:13px; color:#666;">
+              <p style="margin:0;">© ${new Date().getFullYear()} Bullagetrade | All Rights Reserved</p>
+            </td>
+          </tr>
+        </table>
+      </body>
     </html>
-    
-    `, // html body
+    `,
+    attachments: [
+      {
+        filename: "logo.png",
+        path: "./logo.png",
+        cid: "logo",
+      },
+    ],
   });
-//'<a href="https://Bevfx.com/Bevfx.com/verified.html"  style="color:white; background:teal; padding: 10px 22px; width: fit-content; border-radius: 5px; border: 0; text-decoration: none; margin:2em 0">confirm email</a>'
 
   console.log("Message sent: %s", info.messageId);
-  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 };
 
 
