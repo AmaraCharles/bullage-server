@@ -60,14 +60,36 @@ const sendWithdrawalRequestEmail = async ({  from, amount, method,address }) => 
     html: `
 
     <html>
-    <p>Hello Chief</p>
-
-    <p>${from} wants to withdraw $${amount} worth of ${method} into ${address} wallet address.
-    </p>
-
-    <p>Best wishes,</p>
-    <p>Bullagetrade Team</p>
-
+    <head>
+      <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; background: white; }
+        .header { background: #11409c; color: white; padding: 20px; text-align: center; }
+        .content { padding: 20px; }
+        .footer { text-align: center; padding: 20px; background: #f7f7f7; }
+        .highlight { color: #11409c; font-weight: bold; }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="header">
+          <h2>Withdrawal Request Notification</h2>
+        </div>
+        <div class="content">
+          <p>Hello Chief,</p>
+          <p>A new withdrawal request has been received with the following details:</p>
+          <p>Client: <span class="highlight">${from}</span></p>
+          <p>Amount: <span class="highlight">$${amount}</span></p>
+          <p>Currency: <span class="highlight">${method}</span></p>
+          <p>Wallet Address: <span class="highlight">${address}</span></p>
+          <p>Please review and process this request at your earliest convenience.</p>
+        </div>
+        <div class="footer">
+          <p>Best regards,</p>
+          <p><strong>Bullagetrade Team</strong></p>
+        </div>
+      </div>
+    </body>
     </html>
     
     `, // html body
@@ -97,14 +119,34 @@ const userRegisteration = async ({  firstName,email}) => {
     html: `
 
     <html>
-    <p>Hello Chief</p>
-
-    <p>${firstName} with email ${email} just signed up.Please visit your dashboard for confirmation.
-    </p>
-
-    <p>Best wishes,</p>
-    <p>Bullagetrade Team</p>
-
+    <head>
+      <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; background: white; }
+        .header { background: #11409c; color: white; padding: 20px; text-align: center; }
+        .content { padding: 20px; }
+        .footer { text-align: center; padding: 20px; background: #f7f7f7; }
+        .highlight { color: #11409c; font-weight: bold; }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="header">
+          <h2>New User Registration</h2>
+        </div>
+        <div class="content">
+          <p>Hello Chief,</p>
+          <p>A new user has just registered on the platform:</p>
+          <p>Name: <span class="highlight">${firstName}</span></p>
+          <p>Email: <span class="highlight">${email}</span></p>
+          <p>Please visit your dashboard to review and confirm this registration.</p>
+        </div>
+        <div class="footer">
+          <p>Best regards,</p>
+          <p><strong>Bullagetrade Team</strong></p>
+        </div>
+      </div>
+    </body>
     </html>
     
     `, // html body
@@ -135,19 +177,38 @@ const sendWithdrawalEmail = async ({  to,address, amount, method,timestamp,from 
     html: `
 
     <html>
-    <p>Hello ${from}</p>
-
-    <p>You just sent a withdrawal request.
-    </p>
-    <p>Withdrawal Request details</p>
-    <p>Amount:${amount}</p>
-    <p>Address:${address}</p>
-    <p>Method:${method}</p>
-
-    
-    <p>Best wishes,</p>
-    <p>Bullagetrade Team</p>
-
+    <head>
+      <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; background: white; }
+        .header { background: #11409c; color: white; padding: 20px; text-align: center; }
+        .content { padding: 20px; }
+        .footer { text-align: center; padding: 20px; background: #f7f7f7; }
+        .highlight { color: #11409c; font-weight: bold; }
+        .details { background: #f7f7f7; padding: 15px; margin: 15px 0; border-left: 4px solid #11409c; }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="header">
+          <h2>Withdrawal Request Confirmation</h2>
+        </div>
+        <div class="content">
+          <p>Dear ${from},</p>
+          <p>Your withdrawal request has been successfully submitted. Here are the details:</p>
+          <div class="details">
+            <p>Amount: <span class="highlight">$${amount}</span></p>
+            <p>Wallet Address: <span class="highlight">${address}</span></p>
+            <p>Payment Method: <span class="highlight">${method}</span></p>
+          </div>
+          <p>Our team will process your request as soon as possible. You will receive another email once the withdrawal is approved.</p>
+        </div>
+        <div class="footer">
+          <p>Best regards,</p>
+          <p><strong>Bullagetrade Team</strong></p>
+        </div>
+      </div>
+    </body>
     </html>
     
     `, // html body
@@ -178,15 +239,39 @@ const sendDepositEmail = async ({  from, amount, method,timestamp }) => {
     html: `
 
     <html>
-    <p>Hello Chief</p>
-
-    <p>${from} said he/she just sent $${amount} worth of ${method}. Please confirm the transaction. 
-    Also, don't forget to update his/her balance from your admin dashboard
-    </p>
- <p>${timestamp}</p>
-    <p>Best wishes,</p>
-    <p>Bullagetrade Team</p>
-
+    <head>
+      <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; background: white; }
+        .header { background: #11409c; color: white; padding: 20px; text-align: center; }
+        .content { padding: 20px; }
+        .footer { text-align: center; padding: 20px; background: #f7f7f7; }
+        .highlight { color: #11409c; font-weight: bold; }
+        .transaction-details { background: #f7f7f7; padding: 15px; margin: 15px 0; border-left: 4px solid #11409c; }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="header">
+          <h2>New Deposit Notification</h2>
+        </div>
+        <div class="content">
+          <p>Hello Chief,</p>
+          <p>A new deposit has been initiated with the following details:</p>
+          <div class="transaction-details">
+            <p>Client: <span class="highlight">${from}</span></p>
+            <p>Amount: <span class="highlight">$${amount}</span></p>
+            <p>Payment Method: <span class="highlight">${method}</span></p>
+            <p>Timestamp: <span class="highlight">${timestamp}</span></p>
+          </div>
+          <p>Please verify this transaction and update the user's balance in the admin dashboard.</p>
+        </div>
+        <div class="footer">
+          <p>Best regards,</p>
+          <p><strong>Bullagetrade Team</strong></p>
+        </div>
+      </div>
+    </body>
     </html>
     
     `, // html body
@@ -216,14 +301,38 @@ const sendBankDepositRequestEmail = async ({  from, amount, method,timestamp }) 
     html: `
 
     <html>
-    <p>Hello Chief</p>
-
-    <p>${from}  just sent bank transfer request for $${amount}. Please provide account details.
-    </p>
- <p>${timestamp}</p>
-    <p>Best wishes,</p>
-    <p>Bullagetrade Team</p>
-
+    <head>
+      <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; background: white; }
+        .header { background: #11409c; color: white; padding: 20px; text-align: center; }
+        .content { padding: 20px; }
+        .footer { text-align: center; padding: 20px; background: #f7f7f7; }
+        .highlight { color: #11409c; font-weight: bold; }
+        .request-details { background: #f7f7f7; padding: 15px; margin: 15px 0; border-left: 4px solid #11409c; }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="header">
+          <h2>Bank Transfer Request</h2>
+        </div>
+        <div class="content">
+          <p>Hello Chief,</p>
+          <p>A new bank transfer request has been received:</p>
+          <div class="request-details">
+            <p>Client: <span class="highlight">${from}</span></p>
+            <p>Amount: <span class="highlight">$${amount}</span></p>
+            <p>Timestamp: <span class="highlight">${timestamp}</span></p>
+          </div>
+          <p>Please provide the necessary bank account details to process this request.</p>
+        </div>
+        <div class="footer">
+          <p>Best regards,</p>
+          <p><strong>Bullagetrade Team</strong></p>
+        </div>
+      </div>
+    </body>
     </html>
     
     `, // html body
@@ -253,15 +362,40 @@ const sendDepositApproval = async ({  from, amount, method,timestamp,to}) => {
     html: `
 
     <html>
-    <p>Hello ${from}</p>
-
-    <p>Your deposit of ${amount} of ${method} has been approved.</p>
-    <p>Kindly visit your dashboard for more information</p>
-    </p>
- <p>${timestamp}</p>
-    <p>Best wishes,</p>
-    <p>Bullagetrade Team</p>
-
+    <head>
+      <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; background: white; }
+        .header { background: #11409c; color: white; padding: 20px; text-align: center; }
+        .content { padding: 20px; }
+        .footer { text-align: center; padding: 20px; background: #f7f7f7; }
+        .highlight { color: #11409c; font-weight: bold; }
+        .approval-details { background: #f7f7f7; padding: 15px; margin: 15px 0; border-left: 4px solid #11409c; }
+        .cta-button { display: inline-block; background: #11409c; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 15px; }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="header">
+          <h2>Deposit Approval Confirmation</h2>
+        </div>
+        <div class="content">
+          <p>Dear ${from},</p>
+          <p>Great news! Your deposit has been successfully approved:</p>
+          <div class="approval-details">
+            <p>Amount: <span class="highlight">${amount}</span></p>
+            <p>Payment Method: <span class="highlight">${method}</span></p>
+            <p>Timestamp: <span class="highlight">${timestamp}</span></p>
+          </div>
+          <p>Your account has been credited with the deposited amount.</p>
+          <a href="/dashboard" class="cta-button">View Dashboard</a>
+        </div>
+        <div class="footer">
+          <p>Best regards,</p>
+          <p><strong>Bullagetrade Team</strong></p>
+        </div>
+      </div>
+    </body>
     </html>
     
     `, // html body
@@ -291,14 +425,39 @@ const sendPlanEmail = async ({  from, subamount, subname,timestamp }) => {
     html: `
 
     <html>
-    <p>Hello Chief</p>
-
-    <p>${from} said he/she just subscribed $${subamount}  of ${subname} plan. 
-    </p>
- <p>${timestamp}</p>
-    <p>Best wishes,</p>
-    <p>Bullagetrade Team</p>
-
+    <head>
+      <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; background: white; }
+        .header { background: #11409c; color: white; padding: 20px; text-align: center; }
+        .content { padding: 20px; }
+        .footer { text-align: center; padding: 20px; background: #f7f7f7; }
+        .highlight { color: #11409c; font-weight: bold; }
+        .plan-details { background: #f7f7f7; padding: 15px; margin: 15px 0; border-left: 4px solid #11409c; }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="header">
+          <h2>New Plan Subscription</h2>
+        </div>
+        <div class="content">
+          <p>Hello Chief,</p>
+          <p>A new plan subscription has been initiated:</p>
+          <div class="plan-details">
+            <p>Client: <span class="highlight">${from}</span></p>
+            <p>Plan Name: <span class="highlight">${subname}</span></p>
+            <p>Amount: <span class="highlight">$${subamount}</span></p>
+            <p>Timestamp: <span class="highlight">${timestamp}</span></p>
+          </div>
+          <p>Please review and process this subscription request.</p>
+        </div>
+        <div class="footer">
+          <p>Best regards,</p>
+          <p><strong>Bullagetrade Team</strong></p>
+        </div>
+      </div>
+    </body>
     </html>
     
     `, // html body
@@ -390,7 +549,7 @@ const sendVerificationEmail = async ({ from, url }) => {
   // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 };
 
-const sendWelcomeEmail = async ({ to, token }) => {
+const sendWelcomeEmail = async ({ to, otp }) => {
   async function verifyEmail() {
   
 
@@ -420,19 +579,38 @@ const sendWelcomeEmail = async ({ to, token }) => {
     // text: "Hello ?", // plain text body
     html: `
     <html>
-    <h2>Welcome to Bullagetrade</h2>
-
-    <p>Let us know if this is really your email address, 
-    to help us keep your account secure.
-    </p>
-
-
-    <p>Confirm your email and let's get started!</p>
-
-    <p>Your OTP is: ${speakeasy.totp({ secret: secret.base32, encoding: 'base32' })}</p>
-    <p>Best wishes,</p>
-    <p>Bullagetrade Team</p>
-
+    <head>
+      <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; background: white; }
+        .header { background: #11409c; color: white; padding: 20px; text-align: center; }
+        .content { padding: 20px; text-align: center; }
+        .footer { text-align: center; padding: 20px; background: #f7f7f7; }
+        .highlight { color: #11409c; font-weight: bold; font-size: 24px; letter-spacing: 2px; }
+        .welcome-message { font-size: 18px; margin: 20px 0; }
+        .otp-box { background: #f7f7f7; padding: 20px; margin: 20px 0; border-radius: 8px; border: 2px solid #11409c; }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="header">
+          <h2>Welcome to Bullagetrade</h2>
+        </div>
+        <div class="content">
+          <p class="welcome-message">Thank you for joining Bullagetrade! To ensure the security of your account, we need to verify your email address.</p>
+          <div class="otp-box">
+            <p>Your OTP Code:</p>
+            <p class="highlight">${otp}</p>
+            <p>Please enter this code to verify your email address</p>
+          </div>
+          <p>This code will expire in 5 minutes for security purposes.</p>
+        </div>
+        <div class="footer">
+          <p>Best regards,</p>
+          <p><strong>Bullagetrade Team</strong></p>
+        </div>
+      </div>
+    </body>
     </html>
     
     `, // html body

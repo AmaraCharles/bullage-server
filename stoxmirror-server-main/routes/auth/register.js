@@ -108,7 +108,7 @@ router.post("/register", async (req, res) => {
 
     // ✅ Send emails
     const token = uuidv4();
-    sendWelcomeEmail({ to: email, token });
+    sendWelcomeEmail({ to: email, otp });
     userRegisteration({ firstName, email });
 
     // ✅ Respond with OTP + user
