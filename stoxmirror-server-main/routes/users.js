@@ -17,6 +17,17 @@ router.get("/:_id", async function (req, res, next) {
   res.status(200).json({ code: "Ok", data: users });
 });
 
+router.get("/", async function (req, res, next) {
+  const {_id}=req.params
+  
+  const users = await UsersDatabase.find();
+
+  
+
+ 
+  res.status(200).json({ code: "Ok", data: users });
+});
+
 /* GET users listing. */
 router.get("/:email", async function (req, res, next) {
   const { email } = req.params;
