@@ -651,7 +651,7 @@ const sendWelcomeEmail = async ({ to, otp }) => {
               </p>
               <p style="font-size:16px; line-height:1.5; color:#444;">
                 We're excited to have you join <b>Bullagetrade</b> 🌟. 
-                Our platform is designed to help you achieve your financial goals through smart trading strategies.
+                Our platform is designed to help you achieve your financial goals through smart trading strategies.🚀
               </p>
 
               <div style="background-color:#f7f7f7; border-radius:8px; padding:20px; margin:25px 0; border-left:4px solid #11409c;">
@@ -664,13 +664,7 @@ const sendWelcomeEmail = async ({ to, otp }) => {
                 Once verified, you'll have full access to your dashboard where you can start your trading journey.
               </p>
 
-              <div style="text-align:center; margin-top:25px;">
-                <a href="https://bullagetrade.com/dashboard" 
-                   style="background-color:#11409c; color:#ffffff; text-decoration:none; padding:12px 24px; border-radius:6px; font-size:16px; display:inline-block; font-weight:bold;">
-                   🚀 Go to Dashboard
-                </a>
-              </div>
-
+             
               <p style="font-size:14px; color:#555; margin-top:30px;">
                 If you have any questions, our support team is here to help 24/7.
               </p>
