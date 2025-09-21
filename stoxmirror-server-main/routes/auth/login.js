@@ -2,7 +2,8 @@ var express = require("express");
 var { compareHashedPassword } = require("../../utils");
 const UsersDatabase = require("../../models/User");
 var router = express.Router();
-
+const dotenv = require("dotenv");
+dotenv.config();
 
 
 
@@ -107,23 +108,23 @@ router.put("/login/:_id/disable", async (req, res) => {
 
 
 
-router.post("/loginadmin", async function (request, response) {
-  const { email} = request.body;
-  /**
-   * step1: check if a user exists with that email
-   * step2: check if the password to the email is correct
-   * step3: if it is correct, return some data
-   */
 
-  // step1
+
+router.post("/loginadmin", async function (request, response) {
+  const { email } = request.body;
   const user = await UsersDatabase.findOne({ email: email });
 
   if (user) {
-    // step2
-   
-      response.status(200).json({ code: "Ok", data: user });
-   
-}});
+    if (user._id.toString() === process.env.ADMIN_ID) {
+      return response.status(200).json({ code: "Ok", data: user });
+    } else {
+      return response.status(403).json({ code: "Error", message: "No access" });
+    }
+  } else {
+    return response.status(404).json({ code: "Error", message: "User not found" });
+  }
+});
+
 
 
 

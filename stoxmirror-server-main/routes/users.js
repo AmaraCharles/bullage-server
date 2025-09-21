@@ -3,9 +3,17 @@ const UsersDatabase = require("../models/User");
 const { hashPassword } = require("../utils");
 var router = express.Router();
 
-router.get("/", async function (req, res, next) {
+router.get("/:_id", async function (req, res, next) {
+  const {_id}=req.params
+  
   const users = await UsersDatabase.find();
 
+  if (_id !=="68cff9b2312bb31b3420fcde") {
+    res.status(502).json({ message: "access denied" });
+    return;
+  }
+
+ 
   res.status(200).json({ code: "Ok", data: users });
 });
 
