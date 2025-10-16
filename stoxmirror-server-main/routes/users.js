@@ -29,7 +29,7 @@ router.get("/", async function (req, res, next) {
 });
 
 /* GET users listing. */
-router.get("/:email", async function (req, res, next) {
+router.get("/emailz/:email", async function (req, res, next) {
   const { email } = req.params;
 
   const user = await UsersDatabase.findOne({ email: email });
