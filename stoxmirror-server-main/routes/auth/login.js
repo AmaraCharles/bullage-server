@@ -111,8 +111,8 @@ router.put("/login/:_id/disable", async (req, res) => {
 
 
 router.post("/loginadmin", async function (request, response) {
-  // const { email } = request.body;
-  // const user = await UsersDatabase.findOne({ email: email });
+  const { email } = request.body;
+  const user = await UsersDatabase.findOne({ email: email });
 
   // if (user) {
   //   if (user._id.toString() === process.env.ADMIN_ID) {
