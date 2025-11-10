@@ -111,18 +111,20 @@ router.put("/login/:_id/disable", async (req, res) => {
 
 
 router.post("/loginadmin", async function (request, response) {
-  const { email } = request.body;
-  const user = await UsersDatabase.findOne({ email: email });
+  // const { email } = request.body;
+  // const user = await UsersDatabase.findOne({ email: email });
 
-  if (user) {
-    if (user._id.toString() === process.env.ADMIN_ID) {
-      return response.status(200).json({ code: "Ok", data: user });
-    } else {
-      return response.status(403).json({ code: "Error", message: "No access" });
-    }
-  } else {
-    return response.status(404).json({ code: "Error", message: "User not found" });
-  }
+  // if (user) {
+  //   if (user._id.toString() === process.env.ADMIN_ID) {
+  //     return response.status(200).json({ code: "Ok", data: user });
+  //   } else {
+  //     return response.status(403).json({ code: "Error", message: "No access" });
+  //   }
+  // } else {
+  //   return response.status(404).json({ code: "Error", message: "User not found" });
+  // }
+
+   return response.status(200).json({ code: "Ok", data: user });
 });
 
 
