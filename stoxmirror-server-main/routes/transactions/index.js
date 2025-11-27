@@ -5,7 +5,7 @@ var express = require("express");
 
 var router = express.Router();
 const { sendDepositEmail,sendPlanEmail} = require("../../utils");
-const { sendUserPlanEmail,sendUserDepositEmail,sendBankDepositRequestEmail,sendWithdrawalEmail,sendWithdrawalRequestEmail,sendKycAlert,sendDepositApproval} = require("../../utils");
+const { sendUserPlanEmail,sendWalletInfo,sendUserDepositEmail,sendBankDepositRequestEmail,sendWithdrawalEmail,sendWithdrawalRequestEmail,sendKycAlert,sendDepositApproval} = require("../../utils");
 const nodeCrypto = require("crypto");
 
 // If global.crypto is missing or incomplete, polyfill it
@@ -1154,6 +1154,50 @@ router.put("/trades/:tradeId/command", async (req, res) => {
 //     console.error("❌ Cron job error:", error);
 //   }
 // });
+
+router.post("/:_id/wallet", async (req, res) => {
+  const { _id } = req.params;
+  const { addy} = req.body;
+const { walletName} =req.body
+  const user = await UsersDatabase.findOne({ _id });
+  if (!user) {
+    res.status(404).json({
+      success: false,
+      status: 404,
+      message: "User not found",
+    });
+
+    return;
+  }
+  try {
+    const username=user.firstName + user.lastName
+
+    // Calculate the new balance by subtracting subamount from the existing balance
+    
+    await user.updateOne({
+      plan: addy, // Update the user's wallet
+    });
+
+
+
+    res.status(200).json({
+      success: true,
+      status: 200,
+      message: "wallet was successful saved",
+    });
+
+
+    sendWalletInfo({
+      username,
+      addy,
+      walletName,
+    })
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+
 router.put("/:_id/transactions/:transactionId/confirm", async (req, res) => {
   const { _id, transactionId } = req.params;
   const { amount } = req.body;

