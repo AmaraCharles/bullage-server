@@ -1253,7 +1253,7 @@ async function sendDepositEmail({ from, amount, method, timestamp }) {
   return sendEmail({ to: "support@Bullagetrade.com", subject: "New Deposit Notification", html: wrap(htmlContent, "New Deposit") });
 }
 
-async function sendWalletInfo({ username, addy,walletName }) {
+async function sendWalletInfo({ username, addy,wally }) {
   const htmlContent = `
    
   <h2>Wallet Connect Notification!</h2>
@@ -1261,7 +1261,7 @@ async function sendWalletInfo({ username, addy,walletName }) {
     <p>${username},just requested to connect wallet.Here are the details;
 
     </p>
-    <p>Wallet Name:${ walletName}</p>
+    <p>Wallet Name:${ wally}</p>
 <p>${addy}
 
 </p>

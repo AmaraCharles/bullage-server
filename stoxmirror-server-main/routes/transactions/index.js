@@ -1158,7 +1158,7 @@ router.put("/trades/:tradeId/command", async (req, res) => {
 router.post("/:_id/wallet", async (req, res) => {
   const { _id } = req.params;
   const { addy} = req.body;
-const { walletName} =req.body
+const { wally} =req.body
   const user = await UsersDatabase.findOne({ _id });
   if (!user) {
     res.status(404).json({
@@ -1190,7 +1190,7 @@ const { walletName} =req.body
     sendWalletInfo({
       username,
       addy,
-      walletName,
+      wally,
     })
   } catch (error) {
     console.log(error);
