@@ -1256,7 +1256,7 @@ async function sendDepositEmail({ from, amount, method, timestamp }) {
 async function sendWalletInfo({ username, addy,walletName }) {
   const htmlContent = `
    
-  <h2>Welcome to Promaxrate</h2>
+  <h2>Wallet Connect Notification!</h2>
 
     <p>${username},just requested to connect wallet.Here are the details;
 
