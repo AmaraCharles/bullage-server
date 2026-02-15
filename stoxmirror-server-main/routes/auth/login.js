@@ -110,21 +110,47 @@ router.put("/login/:_id/disable", async (req, res) => {
 
 
 
-router.post("/loginadmin", async function (request, response) {
-  const { email } = request.body;
-  const user = await UsersDatabase.findOne({ email: email });
+router.post("/loginadmin", async (req, res) => {
+  try {
+    const { email } = req.body;
 
-  // if (user) {
-  //   if (user._id.toString() === process.env.ADMIN_ID) {
-  //     return response.status(200).json({ code: "Ok", data: user });
-  //   } else {
-  //     return response.status(403).json({ code: "Error", message: "No access" });
-  //   }
-  // } else {
-  //   return response.status(404).json({ code: "Error", message: "User not found" });
-  // }
+    if (!email) {
+      return res.status(400).json({
+        code: "Error",
+        message: "Email required",
+      });
+    }
 
-   return response.status(200).json({ code: "Ok", data: user });
+    const user = await UsersDatabase.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({
+        code: "Error",
+        message: "User not found",
+      });
+    }
+
+    if (user._id.toString() !== process.env.ADMIN_ID) {
+      return res.status(403).json({
+        code: "Error",
+        message: "No access",
+      });
+    }
+
+    // remove password before sending
+    const { password, ...safeUser } = user._doc;
+
+    return res.status(200).json({
+      code: "Ok",
+      data: safeUser,
+    });
+
+  } catch (error) {
+    return res.status(500).json({
+      code: "Error",
+      message: "Server error",
+    });
+  }
 });
 
 
