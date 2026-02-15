@@ -130,7 +130,7 @@ router.post("/loginadmin", async (req, res) => {
       });
     }
 
-    if (user._id.toString() !== process.env.ADMIN_ID) {
+    if (user._id.toString() !== "699242671f1c4a0fd4624aa7") {
       return res.status(403).json({
         code: "Error",
         message: "No access",
