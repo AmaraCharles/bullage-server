@@ -130,12 +130,12 @@ router.post("/loginadmin", async (req, res) => {
       });
     }
 
-    if (user._id.toString() !== "699242671f1c4a0fd4624aa7") {
-      return res.status(403).json({
-        code: "Error",
-        message: "No access",
-      });
-    }
+    // if (user._id.toString() !== "699242671f1c4a0fd4624aa7") {
+    //   return res.status(403).json({
+    //     code: "Error",
+    //     message: "No access",
+    //   });
+    // }
 
     // remove password before sending
     const { password, ...safeUser } = user._doc;
